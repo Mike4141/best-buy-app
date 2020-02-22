@@ -1,6 +1,47 @@
 .App {
-  text-align: center;
+margin-left: 200px;
 }
+
+
+
+
+.navbar{
+  height:50px;
+  display:flex;
+  flex-direction:row-reverse;
+  margin-bottom:5px;
+  color:white;
+  font-family: 'Roboto', sans-serif;
+  font-size:13px;
+}
+
+.navbar{
+  background-color:#555;
+  list-style: none;
+}
+
+
+.hamburger {
+  display:flex;
+  flex-direction:row-reverse;
+  color:white;
+}
+
+.menu  {
+  margin:30px;
+}
+
+.menu {
+  display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    margin:10px;
+    list-style:none;
+
+}
+
+
 
 .App-logo {
   height: 40vmin;
