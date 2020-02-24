@@ -10,7 +10,7 @@ function Login() {
 			<legend>Login</legend>
 
 			<div>
-				<label for="user-email">Email</label>
+				<label HtmlFor="user-email">Email</label>
       <input type="email" placeholder="foo@bar.com" name="user-email" id="user-email" 
       required/>
       </div>

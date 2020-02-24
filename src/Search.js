@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 //import React, { Component } from "react";
 
 class Search extends React.Component {
+  static contextType = ReviewsContext;
+
   state = {
     search: ""
   };
-  static contextType = ReviewsContext;
 
   onSubmit = event => {
     event.preventDefault();
@@ -18,8 +19,6 @@ class Search extends React.Component {
     this.setState({
       search: event.target.value
     });
-
-    console.log(event.target.value);
   };
 
   render() {
@@ -33,16 +32,13 @@ class Search extends React.Component {
             type="text"
             required
           />
-          {this.state.search}
-          <button>Submit</button>
-          {/* <button onClick={this.state.search}>Submit</button> */}
-
+           <button>Submit</button> 
 
           {this.context.products.map(product => {
             return (
-              <li>
+              <li key={product.sku}>
                 {product.name}
-                <Link to={`/reviews/${product.sku}`}>Add Review</Link>
+                <Link to={`/reviews/create/${product.sku}`}>Add Review</Link>
               </li>
             );
           })}

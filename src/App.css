@@ -1,5 +1,5 @@
 .App {
-margin-left: 200px;
+margin-left: 50px;
 }
 
 
@@ -27,14 +27,15 @@ margin-left: 200px;
   color:white;
 }
 
-.menu  {
-  margin:30px;
+.menu > li {
+display: flex;
 }
+
+
 
 .menu {
   display: flex;
     flex-direction: row-reverse;
-    justify-content: space-between;
     align-items: center;
     margin:10px;
     list-style:none;

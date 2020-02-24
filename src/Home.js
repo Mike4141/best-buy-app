@@ -1,5 +1,7 @@
 import React from "react";
 import "./App.css";
+import { Link } from "react-router-dom";
+
 import { ReviewsContext } from "./ReviewsContext";
 
 class Home extends React.Component {
@@ -35,7 +37,10 @@ class Home extends React.Component {
       <div className="App">
         <div>
           <h2>Search Products</h2>
-          <input placeholder="search" type="search" required />
+          <Link to="/search">
+            <p>Search through products</p>
+        </Link>
+
         </div>
 
         <img
@@ -66,16 +71,6 @@ class Home extends React.Component {
             );
           })}
         </ul>
-        <ReviewsContext.Provider value={this.state}>
-
-        {this.state.data.products.map(product => {
-          return (
-            <li key={product.sku}>
-              <h3>{product.name}</h3>
-            </li>
-          );
-        })}
-      </ReviewsContext.Provider>
 
 
       </div>

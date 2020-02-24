@@ -6,7 +6,7 @@ class Nav extends Component {
   render() {
     return (
       <nav className="navbar">
-      <div className="hamburger">&#9776;</div>
+      {/* <div className="hamburger">&#9776;</div> */}
       <ul className="menu">
 
        
