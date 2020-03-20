@@ -10,8 +10,9 @@ export default class Review extends React.Component {
     });
 
     if (review === undefined) {
-      return <div>Review not</div>
+      return <div>Review not</div>;
     }
+   
 
     return (
       <div>

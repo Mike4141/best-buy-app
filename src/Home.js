@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 import { Link } from "react-router-dom";
-
 import { ReviewsContext } from "./ReviewsContext";
+import ProductReviewsPreview from "./ProductReviewsPreview";
 
 class Home extends React.Component {
   state = {
@@ -19,60 +19,23 @@ class Home extends React.Component {
 
   static contextType = ReviewsContext;
 
-  componentDidMount() {
-    fetch(
-      "https://api.bestbuy.com/v1/products(search=oven&search=stainless&search=steel)?format=json&show=sku,image,name,salePrice&apiKey=PcAeIflJtvosaabGyhGYJ0mc"
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        this.setState({ data }); //same as data:data
-      });
-  }
+  
 
   render() {
     console.log(this.context);
     return (
-      <div className="App">
+      <div>
         <div>
           <h2>Search Products</h2>
           <Link to="/search">
-            <p>Search through products</p>
-        </Link>
-
+            <p>Create product review</p>
+          </Link>
         </div>
 
-        <img
-          src="https://via.placeholder.com/1920x1080"
-          width="800px"
-          className="top-image"
-        />
-
-        <p>
-          This would be an explanation of what your app is. Lorem ipsum, dolor
-          sit amet consectetur adipisicing elit. Exercitationem, neque non
-          voluptate natus enim dolor expedita incidunt.
-        </p>
+        <p>This app lets you add reviews for electronic products</p>
 
         <h2>Product Reviews</h2>
-
-        <ul>
-          {this.context.reviews.map(review => {
-            return (
-              <li>
-                <h3>{review.title}</h3>
-                <p>
-                  {review.content}
-                </p>
-              </li>
-
-              
-            );
-          })}
-        </ul>
-
-
+        <ProductReviewsPreview/>
       </div>
     );
   }

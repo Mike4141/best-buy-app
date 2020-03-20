@@ -1,48 +1,58 @@
-.App {
-margin-left: 50px;
+* {
+  box-sizing: border-box;
 }
 
-
-
-
-.navbar{
-  height:50px;
-  display:flex;
-  flex-direction:row-reverse;
-  margin-bottom:5px;
-  color:white;
-  font-family: 'Roboto', sans-serif;
-  font-size:13px;
-}
-
-.navbar{
-  background-color:#555;
+li {
   list-style: none;
 }
 
+.page {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.top-image {
+  width: 250px;
+  margin-right: 50px;
+}
+.review-preview {
+  display: flex;
+}
+
+.navbar {
+  height: 50px;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 5px;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+}
+
+.navbar {
+  background-color: #555;
+  list-style: none;
+}
 
 .hamburger {
-  display:flex;
-  flex-direction:row-reverse;
-  color:white;
+  display: flex;
+  flex-direction: row-reverse;
+  color: white;
 }
 
 .menu > li {
-display: flex;
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
 }
-
-
 
 .menu {
   display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    margin:10px;
-    list-style:none;
-
+  flex-direction: row;
+  align-items: center;
+  margin: 10px;
+  list-style: none;
 }
-
-
 
 .App-logo {
   height: 40vmin;

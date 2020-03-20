@@ -1,7 +1,8 @@
 import React from "react";
 import "./App.css";
-
+import config from "./config";
 import { ReviewsContext } from "./ReviewsContext";
+import auth from "./services/auth";
 
 export default class CreateReview extends React.Component {
   static contextType = ReviewsContext;
@@ -36,18 +37,46 @@ export default class CreateReview extends React.Component {
   onSubmitHandler = e => {
     e.preventDefault();
 
-    const review = {
-      author: { username: "Mike P" },
+    //     const review = {
+    //     author: { username: "Mike P" },
 
-      product: this.state.product,
-      created_at: new Date(),
+    //     product: this.state.product,
+    //     created_at: new Date(),
+    //     title: this.state.title,
+    //     content: this.state.content
+    //   };
+    const data = {
       title: this.state.title,
-      content: this.state.content
+      content: this.state.content,
+      sku: this.props.match.params.sku
     };
 
-    console.log(review);
+    fetch(`${config.API_BASE_URL}/reviews/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${auth.getAuthToken()}`
+      },
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return res.json().then(data => {
+          return Promise.reject(data);
+        });
+      })
+      .then(review => {
+        console.log(review);
 
-    this.context.addReview(review);
+        this.context.addReview(review);
+      })
+      .catch(err => {
+        this.setState({ error: err.error });
+
+        console.log(err);
+      });
   };
 
   render() {
@@ -58,9 +87,10 @@ export default class CreateReview extends React.Component {
     return (
       <div>
         <h1>Create a review</h1>
-        <form onSubmit={this.onSubmitHandler} role="form" className="signup-form">
+        <form onSubmit={this.onSubmitHandler} className="signup-form">
           <fieldset>
             <legend>Create Review</legend>
+            {this.state.error}
 
             <div>
               <label htmlFor="user-email">Title:</label>

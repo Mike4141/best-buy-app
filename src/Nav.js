@@ -1,46 +1,55 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import auth from "./services/auth";
+import {ReviewsContext} from "./ReviewsContext"
 
 class Nav extends Component {
+static contextType = ReviewsContext;
+
+  logout = () => {
+    auth.clearAuthToken();
+    this.context.logout()
+    this.props.history.push("/");
+
+  };
+
   render() {
+    let button;
+    if (this.context.isLoggedIn) {
+    
+      button = (
+        <Link onClick={this.logout} to="/logout">
+          logout
+        </Link>
+      );
+    } else {
+      button = <Link to="/login">login</Link>;
+    }
+
     return (
       <nav className="navbar">
-      {/* <div className="hamburger">&#9776;</div> */}
-      <ul className="menu">
+        {/* <div className="hamburger">&#9776;</div> */}
+        <ul className="menu">
+          <li>
+            <Link to="/search">Create Review</Link>
+          </li>
 
-       
-  
-        <Link to="/create-review">
-        <li>Create Review</li>
-        </Link>
-  
-        <Link to="/reviews">
-        <li>Review's</li>
-        </Link>
+          <li>
+            <Link to="/reviews">Review's</Link>
+          </li>
 
-        <Link to="/register">
-        <li>Register</li>
-        </Link>
-
-        <Link to="/">
-        <li>Home</li>
-        </Link>
-
-        <Link to="/login">
-        <li>Login</li>
-        </Link>
-
-
-      
-      
-      </ul>
-    </nav>
-  
-      
-     
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>{button}</li>
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
+        </ul>
+      </nav>
     );
   }
 }
 
-export default Nav;
+export default withRouter(Nav);

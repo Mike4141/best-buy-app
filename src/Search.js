@@ -8,6 +8,7 @@ class Search extends React.Component {
 
   state = {
     search: ""
+
   };
 
   onSubmit = event => {
@@ -25,6 +26,8 @@ class Search extends React.Component {
     return (
       <div>
         <h2>Search Products</h2>
+
+        <p>search for a product to create a review</p>
         <form onSubmit={this.onSubmit}>
           <input
             onChange={this.onChange}
@@ -32,9 +35,9 @@ class Search extends React.Component {
             type="text"
             required
           />
-           <button>Submit</button> 
+          <button>Submit</button>
 
-          {this.context.products.map(product => {
+          {this.context.searchedProducts.map(product => {
             return (
               <li key={product.sku}>
                 {product.name}
