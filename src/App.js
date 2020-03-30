@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
-import Search from "./Search";
-import ProductReviewsPreview from "./ProductReviewsPreview";
+import SearchReview from "./SearchReview";
 import Home from "./Home";
 import Nav from "./Nav";
 import Login from "./Login";
-import Review from "./Review";
 import Register from "./Register";
 import Reviews from "./Reviews";
-import CreateReview from "./CreateReview";
+import AddReview from "./AddReview";
 import config from "./config";
+import ProfileReviews from "./ProfileReviews";
 import {
   BrowserRouter as Router,
   Switch,
@@ -32,14 +31,17 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 class App extends Component {
   state = {
     isLoggedIn: false,
-    searchedProducts:[],
-    products: [], 
+    searchedProducts: [],
+    products: [],
 
     reviews: []
   };
 
   componentDidMount = () => {
-    const fetch1 = fetch(`${config.API_BASE_URL}/reviews/`)
+    if (auth.hasAuthToken()) {
+      this.setState({isLoggedIn: true})
+    }
+    fetch(`${config.API_BASE_URL}/reviews/`)
       .then(response => {
         return response.json();
       })
@@ -86,11 +88,29 @@ class App extends Component {
     console.log(value);
   };
 
-  addReview = review => {
-    console.log(review)
+  addReview = reviews => {
+    const alreadyExists = this.state.reviews.filter(review => {
+      return reviews.some(r => r.id !== review.id)
+    })
+    
+    console.log(reviews);
+    if (alreadyExists) {
+      return null;
+    }
 
-    this.setState({ reviews: this.state.reviews.concat(review) });
-    this.props.history.push(`/reviews/${review.id}`);
+    this.setState({ reviews: this.state.reviews.push(reviews) });
+  };
+
+  deleteReview = reviewId => {
+    this.setState({
+      reviews: this.state.reviews.filter(review => {
+        if (review.id !== reviewId) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+    });
   };
 
   logout = () => {
@@ -111,7 +131,8 @@ class App extends Component {
       products: this.state.products,
       reviews: this.state.reviews,
       addReview: this.addReview,
-      searchedProducts: this.state.searchedProducts
+      searchedProducts: this.state.searchedProducts,
+      deleteReview: this.deleteReview
     };
     return (
       <div className="App">
@@ -119,8 +140,14 @@ class App extends Component {
           <Nav />
           <div className="page">
             <Switch>
+              <PrivateRoute
+                exact={true}
+                path="/profile/reviews"
+                component={ProfileReviews}
+              />
+
               <Route exact={true} path="/" component={Home} />
-              <Route exact={true} path="/search" component={Search} />
+              <Route exact={true} path="/search" component={SearchReview} />
 
               <Route exact={true} path="/login" component={Login} />
               <Route exact={true} path="/register" component={Register} />
@@ -129,15 +156,11 @@ class App extends Component {
               <PrivateRoute
                 exact={true}
                 path="/reviews/create/:sku"
-                component={CreateReview}
+                component={AddReview}
               />
               {/* /reviews/create */}
               {/* /reviews/123 */}
-              <Route
-                exact={true}
-                path="/reviews/:reviewId"
-                component={Review}
-              />
+             
             </Switch>
           </div>
         </ReviewsContext.Provider>

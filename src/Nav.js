@@ -2,28 +2,31 @@ import React, { Component } from "react";
 import "./App.css";
 import { Link, withRouter } from "react-router-dom";
 import auth from "./services/auth";
-import {ReviewsContext} from "./ReviewsContext"
+import { ReviewsContext } from "./ReviewsContext";
 
 class Nav extends Component {
-static contextType = ReviewsContext;
+  static contextType = ReviewsContext;
 
   logout = () => {
     auth.clearAuthToken();
-    this.context.logout()
-    this.props.history.push("/");
-
+    this.context.logout();
   };
 
   render() {
+    let myProfile;
+    let registerButton;
     let button;
     if (this.context.isLoggedIn) {
-    
+      myProfile = <Link to="/profile/reviews">My profile</Link>;
+
       button = (
-        <Link onClick={this.logout} to="/logout">
+        <Link onClick={this.logout} to="/login">
           logout
         </Link>
       );
     } else {
+      registerButton = <Link to="/register">Register</Link>;
+
       button = <Link to="/login">login</Link>;
     }
 
@@ -31,6 +34,7 @@ static contextType = ReviewsContext;
       <nav className="navbar">
         {/* <div className="hamburger">&#9776;</div> */}
         <ul className="menu">
+          <li>{myProfile}</li>
           <li>
             <Link to="/search">Create Review</Link>
           </li>
@@ -43,9 +47,7 @@ static contextType = ReviewsContext;
             <Link to="/">Home</Link>
           </li>
           <li>{button}</li>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
+          <li>{registerButton}</li>
         </ul>
       </nav>
     );

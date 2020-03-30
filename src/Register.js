@@ -59,6 +59,7 @@ export default class Register extends React.Component {
         method="post"
         className="signup-form"
       >
+        
         {this.state.error}
         <fieldset>
           <legend>Create an account</legend>

@@ -57,13 +57,16 @@ class Login extends React.Component {
 
   render() {
     return (
+      
       <form
         onSubmit={this.onSubmitHandler}
         role="form"
         accept-charset="UTF-8"
         method="post"
         class="signup-form"
+        
       >
+        {this.state.error}
         <fieldset>
           <legend>Login</legend>
 
