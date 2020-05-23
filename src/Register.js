@@ -57,24 +57,23 @@ export default class Register extends React.Component {
         action="/signup"
         accept-charset="UTF-8"
         method="post"
-        className="signup-form"
+        className="sign-up"
       >
         
         {this.state.error}
-        <fieldset>
-          <legend>Create an account</legend>
-   
-          <div>
+          <h2>Create an account</h2>
+             <div>
             <label for="username">Username</label>
             <input
               onChange={this.onChange}
-              type="text"
+              type='username'
               placeholder="username"
               name="username"
               id="username"
               required
             />
-          </div>
+            </div>
+          
 
           <div>
             <label for="user-password">Password</label>
@@ -88,8 +87,7 @@ export default class Register extends React.Component {
             />
           </div>
 
-          <button type="submit">Sign up</button>
-        </fieldset>
+          <button type="submit" style={{width:'100%'}}>Sign up</button>
       </form>
     );
   }

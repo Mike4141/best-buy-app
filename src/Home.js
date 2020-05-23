@@ -5,9 +5,7 @@ import { ReviewsContext } from "./ReviewsContext";
 import ProductReviewsPreview from "./ProductReviewsPreview";
 
 class Home extends React.Component {
-  state = {
-    reviews: []
-  };
+ 
   static contextType = ReviewsContext;
 
   render() {
@@ -15,7 +13,7 @@ class Home extends React.Component {
 
     if (reviews.length === 0) {
       return (
-        <div>
+        <div className='title-center'>
           <div>
             <h2>Search Products</h2>
             <Link to="/search">

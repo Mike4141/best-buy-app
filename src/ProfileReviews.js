@@ -3,6 +3,8 @@ import auth from "./services/auth";
 import config from "./config";
 import { ReviewsContext } from "./ReviewsContext";
 
+//put content in form so it refreshes
+
 export default class ProfileReviews extends React.Component {
   static contextType = ReviewsContext;
 
@@ -53,15 +55,24 @@ export default class ProfileReviews extends React.Component {
             return String(product.sku) === String(review.sku);
           });
           return (
-            
-            <div>
+            <div className='container'>
+
+            <div className='section'>
+
+
+               <h2>{review.title}</h2>
+
               <img
                 src={product && product.image}
-                width="800px"
-                className="top-image"
+                
               />
-              <h3>{review.title}</h3>
-              <button onClick={() => this.deleteReview(review)}>Delete</button>
+              <div className='container'>
+                <div>
+            
+             <button className='btn' style={{marginTop:'70px'}} onClick={() => this.deleteReview(review)}>Delete</button>
+             </div>
+             </div>
+            </div>
             </div>
           );
         })}

@@ -58,31 +58,33 @@ class Login extends React.Component {
   render() {
     return (
       
-      <form
+      <form  
+
         onSubmit={this.onSubmitHandler}
         role="form"
         accept-charset="UTF-8"
         method="post"
-        class="signup-form"
+        class="sign-up"
         
-      >
+      > <div style={{alignItems:''}}>
         {this.state.error}
-        <fieldset>
-          <legend>Login</legend>
-
-          <div>
+        
+        
+          
+          <h2 className='' style={{ fontSize:'50px', marginLeft:''}}>Login</h2>
+          
             <label htmlFor="username">Username</label>
             <input
               onChange={this.onChange}
-              type="text"
+              type="username"
               placeholder="foo@bar.com "
               name="username"
               id="username"
               required
             />
-          </div>
+          
 
-          <div>
+          
             <label htmlFor="password">Password</label>
             <input
               onChange={this.onChange}
@@ -92,11 +94,16 @@ class Login extends React.Component {
               id="password"
               required
             />
-          </div>
+          
+          
 
-          <button type="submit">Log In</button>
-        </fieldset>
+          <button type="submit" style={{width:'100%'}}>Log In</button>
+          
+        
+        
+      </div>
       </form>
+      
     );
   }
 }

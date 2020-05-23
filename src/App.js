@@ -10,7 +10,7 @@ import AddReview from "./AddReview";
 import config from "./config";
 import ProfileReviews from "./ProfileReviews";
 import {
-  BrowserRouter as Router,
+  
   Switch,
   Route,
   withRouter,
@@ -33,13 +33,12 @@ class App extends Component {
     isLoggedIn: false,
     searchedProducts: [],
     products: [],
-
-    reviews: []
+    reviews: [],
   };
 
   componentDidMount = () => {
     if (auth.hasAuthToken()) {
-      this.setState({isLoggedIn: true})
+      this.setState({ isLoggedIn: true });
     }
     fetch(`${config.API_BASE_URL}/reviews/`)
       .then(response => {
@@ -82,6 +81,7 @@ class App extends Component {
         return response.json();
       })
       .then(data => {
+        console.log(data.products)
         this.setState({ searchedProducts: data.products });
       });
 
@@ -90,9 +90,9 @@ class App extends Component {
 
   addReview = reviews => {
     const alreadyExists = this.state.reviews.filter(review => {
-      return reviews.some(r => r.id !== review.id)
-    })
-    
+      return reviews.some(r => r.id !== review.id);
+    });
+
     console.log(reviews);
     if (alreadyExists) {
       return null;
@@ -160,7 +160,6 @@ class App extends Component {
               />
               {/* /reviews/create */}
               {/* /reviews/123 */}
-             
             </Switch>
           </div>
         </ReviewsContext.Provider>

@@ -17,7 +17,7 @@ export default class AddReview extends React.Component {
 
   componentDidMount() {
     const sku = this.props.match.params.sku;
-    const url = `https://api.bestbuy.com/v1/products(sku=${sku})?show=customerReviewAverage,customerReviewCount,name,sku,image&format=json&apiKey=PcAeIflJtvosaabGyhGYJ0mc`;
+    const url = `https://api.bestbuy.com/v1/products(sku=${sku})?show=customerReviewAverage,customerReviewCount,name,sku,image&format=json&apiKey=cd `;
 
     fetch(url)
       .then(res => {
@@ -74,16 +74,14 @@ export default class AddReview extends React.Component {
   render() {
   
     return (
-      <div>
-        <h1>Create a review</h1>
+      <div className="sign-up">
         <form onSubmit={this.onSubmitHandler} className="signup-form">
-          <fieldset>
             <h2>Create Review</h2>
             {this.state.error}
 
-            <div>
-              <label >Title:</label>
-              <input
+            <div className='flex' style={{marginLeft:'155px'}}>
+              <label style={{marginTop:'15px'}}>Title:</label>
+              <input style={{width:'50%', marginLeft:'10px'}}
                 onChange={this.onChangeHandler}
                 type="text"
                 placeholder="Posting title here"
@@ -94,15 +92,13 @@ export default class AddReview extends React.Component {
             </div>
 
             <div>
-              <textarea
-                onChange={this.onChangeHandler}
+              <textarea style={{width:'500px', height:'400px'}}             onChange={this.onChangeHandler}
                 id="review-content"
                 name="content"
               ></textarea>
             </div>
 
-            <button type="submit">submit</button>
-          </fieldset>
+            <button type="submit" style={{width:'50%', marginLeft:'150px', marginTop:'30px'}}>submit</button>
         </form>
       </div>
     );

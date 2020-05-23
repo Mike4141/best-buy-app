@@ -30,9 +30,8 @@ class Nav extends Component {
       button = <Link to="/login">login</Link>;
     }
 
-    return (
+    return ( 
       <nav className="navbar">
-        {/* <div className="hamburger">&#9776;</div> */}
         <ul className="menu">
           <li>{myProfile}</li>
           <li>
